@@ -6,9 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DialogCancelTaskComponent } from '@components/dialog-cancel-task/dialog-cancel-task.component';
 import { DialogCreateTaskComponent } from '@components/dialog-create-task/dialog-create-task.component';
-import { DialogDoneTaskComponent } from '@components/dialog-done-task/dialog-done-task.component';
 import { DialogTaskDetailComponent } from '@components/dialog-task-detail/dialog-task-detail.component';
 import { environment } from '@env/environment';
 import { CustomSnackbarService } from '@pages/auth/services/custom-snackbar.service';
@@ -31,13 +29,12 @@ export class TaskComponent implements OnInit {
     totalRow: number = 10;
     isLoading !: boolean;
     keySearch = new FormControl('');
-    arrayPageSize = [10, 20, 30];
+    arrayPageSize = [4, 10, 15];
     sortObj!: Sort;
     mapPageToken = new Map();
     status!: string;
     offset !: number;
 
-    // statusList : string[] =['Đã tạo', 'Chưa giao NV', 'Hoàn thành', 'Đã huỷ'];
     statusList: any = [
         {
             name: "Đã tạo",
@@ -100,13 +97,12 @@ export class TaskComponent implements OnInit {
 
     openDialogCreateTask() {
         const dialogRef = this.dialog.open(DialogCreateTaskComponent);
-
         dialogRef.afterClosed().subscribe(() => {
             this.getListTasks();
         });
     }
 
-    openDialogEditTask(taskId: string, status: string) {
+    openDialogEditTask(taskId: number, status: string) {
         const data = { taskId, status };
         const dialogRef = this.dialog.open(DialogTaskDetailComponent, { data });
 
@@ -115,28 +111,6 @@ export class TaskComponent implements OnInit {
         });
     }
 
-    openDialogGetListService(discountId: string, discountName: string) {
-
-    }
-
-    onSearch() {
-
-        this.clearSort();
-        this.selection.clear();
-        this.getListTasks();
-    }
-
-    clearSort() {
-        this.sort.sort({ id: '', start: 'asc', disableClear: false });
-        this.sortObj = {
-            active: '',
-            direction: '',
-        };
-        this.paginator.pageIndex = 0;
-    }
-    deleteTask() {
-
-    }
 
     getListTasks() {
         this.isLoading = true;
@@ -150,10 +124,7 @@ export class TaskComponent implements OnInit {
             .set('offset', this.offset)
             .set('limit', this.pageSize)
             .set('status', status)
-            .set('value_search', this.keySearch.value)
-            .set('column_sort', this.sortObj && this.sortObj.direction ? this.sortObj.active.toUpperCase() : '')
-            .set('type_sort', this.sortObj ? this.sortObj.direction.toUpperCase() : '');
-        this.http.get(environment.apiUrl + "/task", { params: params })
+        this.http.get(environment.apiUrl + "/task/user", { params: params })
             .subscribe((res: any) => {
                 this.totalRow = res.total_rows;
                 this._prepareTaskList(res.data);
@@ -167,14 +138,13 @@ export class TaskComponent implements OnInit {
             const result = Array<TaskListDomain>();
             for (let i = 0; i < data.length; i++) {
                 const id = data[i].id;
-                const user_name = data[i].user_name;
-                const user_avatar = data[i].user_avatar;
-                const address = data[i].address;
                 const startTime = data[i].start_time;
                 const endTime = data[i].end_time;
                 const workDate = data[i].work_date;
                 const status = data[i].status;
-                const domain = new TaskListDomain(id as number, user_name, user_avatar, address, workDate, startTime, endTime, status);
+                const employeeAVatar = data[i].employee_avatar;
+                const address = data[i].address;
+                const domain = new TaskListDomain(id as number, workDate, startTime, endTime, status, employeeAVatar, address);
                 result.push(domain);
             }
             this.taskList = result;
@@ -200,23 +170,4 @@ export class TaskComponent implements OnInit {
         this.getListTasks();
     }
 
-    cancelTask(taskId: any, status: any) {
-        const data = { taskId };
-        const dialogRef = this.dialog.open(DialogCancelTaskComponent, { data });
-        dialogRef.afterClosed().subscribe((data: any) => {
-            if (data.isChange) {
-                this.getListTasks();
-            }
-        })
-    }
-
-    doneTask(taskId: any, status: any) {
-        const data = { taskId };
-        const dialogRef = this.dialog.open(DialogDoneTaskComponent, { data });
-        dialogRef.afterClosed().subscribe((data: any) => {
-            if (data.isChange) {
-                this.getListTasks();
-            }
-        })
-    }
 }

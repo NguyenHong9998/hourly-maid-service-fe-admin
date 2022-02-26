@@ -1,176 +1,195 @@
+<div class="w-full h-4/5  " id="cover-div">
+  <img class="w-full h-full shadow-xl ring-1 ring-black ring-opacity-5" [src]="cover" alt="">
+</div>
+<div class="bg-white pb-10">
+  <div>
+    <main>
+      <div class="relative bg-white  sm:py-20 lg:py-20">
+        <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
 
-<section class="container flex items-center justify-center">
-  <main class="mx-auto my-16 md:max-w-xl">
-    <div class="text-center">
-      <h1 class="mb-4 text-2xl md:text-4xl">
-        👋 Welcome to Angular Boilerplate
-      </h1>
-      <p class="mb-12 text-base md:text-xl">
-        ⚒️ Start building your SPA easily ⚒️
-      </p>
+          <div class="">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
-      <a
-        class="link"
-        [routerLink]="['/', path.base.dashboard]"
-        class="inline-block h-12 px-6 py-3 mb-12 font-semibold text-white bg-blue-600 rounded-lg  hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none"
-      >
-        Go to dashboard
-      </a>
-    </div>
+              <div class="">
+                <div class="flow-root bg-gray-100 rounded-lg px-6 pb-8">
+                  <div class="-mt-6">
+                    <div>
+                      <span
+                        class="inline-flex items-center justify-center  bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
 
-    <h3>Choose a theme</h3>
-    <div class="grid grid-cols-1 mb-12 gap-x-6 gap-y-3 md:grid-cols-3">
-      <button
-        class="inline-flex items-center h-12 px-6 py-3 font-semibold text-center text-white bg-gray-600 rounded-lg  hover:bg-gray-500 focus:ring-4 focus:ring-offset-gray-600 focus:outline-none"
-        (click)="onClickChangeTheme(theme.System)"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6 mr-3"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-          />
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
-        System
-      </button>
-      <button
-        class="inline-flex items-center h-12 px-6 py-3 font-semibold text-center text-white bg-gray-600 rounded-lg  hover:bg-gray-500 focus:ring-4 focus:ring-offset-gray-600 focus:outline-none"
-        (click)="onClickChangeTheme(theme.Light)"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6 mr-3"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-          />
-        </svg>
-        Light
-      </button>
-      <button
-        class="inline-flex items-center h-12 px-6 py-3 font-semibold text-center text-white bg-gray-600 rounded-lg  hover:bg-gray-500 focus:ring-4 focus:ring-offset-gray-600 focus:outline-none"
-        (click)="onClickChangeTheme(theme.Dark)"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6 mr-3"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-          />
-        </svg>
-        Dark
-      </button>
-    </div>
+                        <img src="../../../assets/img/employee_good.png">
+                      </span>
+                    </div>
+                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Người giúp việc nhà tiêu chuẩn
+                    </h3>
+                    <p class="mt-5 text-base ">
+                      Người giúp việc nhà tiêu chuẩn, đáng tin cậy, có đầy đủ hồ sơ. Công ty chịu trách nhiệm
+                      tuyển chọn, đào tạo và quản lý.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-    <h3>👉 Visit the app pages</h3>
+              <div class="">
+                <div class="flow-root bg-gray-100 rounded-lg px-6 pb-8">
+                  <div class="-mt-6">
+                    <div>
+                      <span
+                        class="inline-flex items-center justify-center  bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
+                        <img src="../../../assets/img/advantage.png">
+                      </span>
+                    </div>
+                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Dịch vụ tiện lợi</h3>
+                    <p class="mt-5 text-base ">
+                      Tìm Người giúp việc nhà nhanh chóng qua vài thao tác. Cung cấp đầy đủ thông tin về dịch vụ và
+                      Người giúp việc
+                    </p>
+                  </div>
+                </div>
+                <div class="pt-10">
+                  <a id="book_tag" href="#"
+                    class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-bold rounded-md shadow-sm bg-opacity-60 hover:bg-opacity-70 sm:px-8">
+                    Đặt dịch vụ ngay
+                  </a>
+                </div>
+              </div>
 
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
-      <div>
-        <h4 class="h5">Settings</h4>
-        <ul>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.auth.root, path.auth.signIn]"
-            >
-              Account
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.settings.root, path.settings.appearance]"
-            >
-              Appearance
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.settings.root, path.settings.billing]"
-            >
-              Billing
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.settings.root, path.settings.blockedUsers]"
-            >
-              Blocked users
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.settings.root, path.settings.notifications]"
-            >
-              Notifications
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.settings.root, path.settings.security]"
-            >
-              Security
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.settings.root, path.settings.securityLog]"
-            >
-              Security log
-            </a>
-          </li>
-        </ul>
+              <div class="">
+                <div class="flow-root bg-gray-100 rounded-lg px-6 pb-8">
+                  <div class="-mt-6">
+                    <div>
+                      <span
+                        class="inline-flex items-center justify-center  bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
+                        <img src="../../../assets/img/profession.png">
+                      </span>
+                    </div>
+                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Chuyên nghiệp - Tận tâm
+                    </h3>
+                    <p class="mt-5 text-base ">
+                      Đội ngũ tiếp nhận yêu cầu và nhân viên đầy kinh nghiệm, chuyên nghiệp, tận tâm
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <h4 class="h5">User</h4>
-        <ul>
-          <li>
-            <a class="link" [routerLink]="['/', path.user.root, 'john_wick97']">
-              My profile
-            </a>
-          </li>
-          <li>
-            <a
-              class="link"
-              [routerLink]="['/', path.user.root, path.user.overview]"
-            >
-              Users overview
-            </a>
-          </li>
-        </ul>
+
+      <div class="relative bg-white ">
+        <div class="relative  ">
+          <div class="relative">
+            <div class="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+              <p class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+                Dịch vụ của chúng tôi
+              </p>
+              <p class="mt-5 mx-auto max-w-prose text-xl text-gray-500">
+                Giúp việc theo giờ kết nối nhu cầu giúp việc của Khách hàng & Người lao động.
+              </p>
+            </div>
+
+
+            <ngx-slick-carousel class="carousel pt-7" #slickModal="slick-carousel" [config]="slideConfig"
+              (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+              (beforeChange)="beforeChange($event)">
+
+              <div ngxSlickItem *ngFor="let service of services" class="slide">
+                <div class="flex flex-col shadow-lg overflow-hidden">
+                  <div class="flex-shrink-0">
+                    <img class="h-48 w-full object-cover" [src]="service.banner" alt="">
+                  </div>
+                  <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                    <div class="flex-1">
+
+                      <a class="block mt-2">
+                        <p class="text-xl font-semibold text-gray-900">
+                          {{service.name}}
+                        </p>
+                        <p class="mt-3 text-base text-gray-500">
+                          {{service.introduce}}
+                        </p>
+                      </a>
+                    </div>
+                    <div class="pt-3">
+                      <a id="book_tag" href="#"
+                        class="flex items-center justify-center px-4 py-3 border  text-base font-medium rounded-md shadow-sm  hover:bg-opacity-70 sm:px-8">
+                        Xem chi tiết
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+</div>
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-white pb-10">
+  <div class="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
+    <div class="bg-gray-50 rounded-2xl px-6  sm:p-8">
+      <div class="max-w-xl mx-auto lg:max-w-none">
+        <div class="text-center">
+          <p class="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+            Thành quả của chúng tôi
+          </p>
+        </div>
+        <div class="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-8 gap-x-8 sm:max-w-none lg:grid-cols-3">
+          <div class="text-center sm:flex sm:text-left lg:block lg:text-center">
+            <div class="sm:flex-shrink-0">
+              <div class="flow-root">
+                <img class="w-16 h-16 mx-auto" src="../../../assets/img/num_employee.png"
+                  alt="">
+              </div>
+            </div>
+            <div class="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
+              <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Tổng số nhân viên
+              </h3>
+              <dd class="mt-1 text-3xl font-semibold text-blue-800	">
+                50 nhân viên
+              </dd>
+            </div>
+          </div>
+
+          <div class="text-center sm:flex sm:text-left lg:block lg:text-center">
+            <div class="sm:flex-shrink-0">
+              <div class="flow-root">
+                <img class="w-16 h-16 mx-auto" src="../../../assets/img/clock.png"
+                  alt="">
+              </div>
+            </div>
+            <div class="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
+              <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Tổng số giờ làm
+              </h3>
+              <dd class="mt-1 text-3xl font-semibold text-blue-800	">
+                71,897 giờ trên năm
+              </dd>
+            </div>
+          </div>
+
+          <div class="text-center sm:flex sm:text-left lg:block lg:text-center">
+            <div class="sm:flex-shrink-0">
+              <div class="flow-root">
+                <img class="w-16 h-16 mx-auto" src="../../../assets/img/smile_emoji.png"
+                  alt="">
+              </div>
+            </div>
+            <div class="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
+              <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Tổng số khách hàng hài lòng
+              </h3>
+              <dd class="mt-1 text-3xl font-semibold text-blue-800	">
+                71,897
+              </dd>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </main>
-</section>
+  </div>
+</div>

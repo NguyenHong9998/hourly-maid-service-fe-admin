@@ -15,13 +15,13 @@
                                 hover:text-white px-3 py-2 rounded-md text-sm
                                 font-medium'" (click)="setActiveNumber(1)">Trang
                                 chủ</a>
-                            <a  (click) = "onClickEmployee()" [ngClass]="(activeIndex ==2 )? 'bg-gray-900
+                            <!-- <a  (click) = "onClickEmployee()" [ngClass]="(activeIndex ==2 )? 'bg-gray-900
                                 text-white px-3 py-2
                                 rounded-md text-sm font-medium' : 'text-gray-300
                                 hover:bg-gray-700
                                 hover:text-white px-3 py-2 rounded-md text-sm
                                 font-medium'" >Nhân
-                                viên</a>
+                                viên</a> -->
                             <a (click) = "onClickService()" [ngClass]="(activeIndex == 3 )? 'bg-gray-900
                                 text-white px-3 py-2
                                 rounded-md text-sm font-medium' : 'text-gray-300
@@ -29,13 +29,13 @@
                                 hover:text-white px-3 py-2 rounded-md text-sm
                                 font-medium'" >Dịch
                                 vụ</a>
-                            <a (click) = "onCLickDiscount()" [ngClass]="(activeIndex == 4 )? 'bg-gray-900
+                            <!-- <a (click) = "onCLickDiscount()" [ngClass]="(activeIndex == 4 )? 'bg-gray-900
                                 text-white px-3 py-2
                                 rounded-md text-sm font-medium' : 'text-gray-300
                                 hover:bg-gray-700
                                 hover:text-white px-3 py-2 rounded-md text-sm
                                 font-medium'" >Chương
-                                trình</a>
+                                trình</a> -->
                             <a  (click) = "onCLickTask()" [ngClass]="(activeIndex == 5 )? 'bg-gray-900
                                 text-white px-3 py-2
                                 rounded-md text-sm font-medium' : 'text-gray-300
@@ -43,20 +43,20 @@
                                 hover:text-white px-3 py-2 rounded-md text-sm
                                 font-medium'" >Công
                                 việc</a>
-                            <a (click) = "onClickLeaveDate()" [ngClass]="(activeIndex == 6 )? 'bg-gray-900
+                            <!-- <a (click) = "onClickLeaveDate()" [ngClass]="(activeIndex == 6 )? 'bg-gray-900
                                 text-white px-3 py-2
                                 rounded-md text-sm font-medium' : 'text-gray-300
                                 hover:bg-gray-700
                                 hover:text-white px-3 py-2 rounded-md text-sm
                                 font-medium'" >Lịch
-                                làm</a>
+                                làm</a> -->
                             
                             <a (click) = "onClickNotify()" [ngClass]="(activeIndex == 7)? 'bg-gray-900
                                 text-white px-3 py-2
                                 rounded-md text-sm font-medium' : 'text-gray-300
                                 hover:bg-gray-700
                                 hover:text-white px-3 py-2 rounded-md text-sm
-                                font-medium'" >Thông
+                                font-medium'" matBadge=" "  matBadgeColor="accent">Thông
                                 báo</a>
                         </div>
                     </div>
@@ -66,6 +66,7 @@
 
                         <div class="ml-3 relative">
                             <div>
+                                
                                 <button 
                                 type="button" [matMenuTriggerFor]="menu" class="max-w-xs bg-gray-800 rounded-full
                                     flex items-center text-sm

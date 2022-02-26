@@ -101,6 +101,7 @@ export class DialogCreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListServices();
+    this.getCustomerInform();
   }
 
   onNoClick(): void {
@@ -173,17 +174,11 @@ export class DialogCreateTaskComponent implements OnInit {
   }
 
   getCustomerInform() {
-    let params = new HttpParams()
-      .set('phone', this.customerPhone)
-      .set('email', this.email)
-    this.http.get(environment.apiUrl + "/client/check", { params: params }).subscribe((data: any) => {
-      if (!data.data) {
-        this.isExistClient = false;
-        this.disableNext = true;
-      } else {
-        this.isExistClient = true;
-        this.disableNext = false;
-      }
+
+    this.http.get(environment.apiUrl + "/user/personal-inform").subscribe((data: any) => {
+      this.customerName = data.data.name;
+      this.customerPhone = data.data.phone;
+      this.email = data.data.email;
     })
   }
 
@@ -249,16 +244,16 @@ export class DialogCreateTaskComponent implements OnInit {
     const end = format(new Date(), "yyyy-MM-dd") + " " + this.endTime + ":00";
     const serviceIds = this.selectedService.map((x: any) => x.id);
     const body = {
-      email : this.email,
-      phone : this.customerPhone,
-      address : this.address,
-      user_name :this.customerName,
+      email: this.email,
+      phone: this.customerPhone,
+      address: this.address,
+      user_name: this.customerName,
       service_id: serviceIds,
       start_time: start,
       end_time: end,
       num_of_employee: this.numberOfemployee
     }
-    this.http.post(environment.apiUrl + "/task", body).subscribe((data) =>{
+    this.http.post(environment.apiUrl + "/task", body).subscribe((data) => {
       this.snackbar.success("Tạo mới thành công");
       this.stepper.next();
     })

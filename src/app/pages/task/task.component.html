@@ -5,7 +5,6 @@
                 class="flex bg-transparent bg-blue-200 hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                 <mat-icon>playlist_add</mat-icon>
                 <span class="pl-2">Tạo công việc</span>
-
             </button>
 
             <mat-selection-list #selectStatus [multiple]="false" [(ngModel)]="selectedStatus"
@@ -26,177 +25,92 @@
             <h2 class="text-lg font-extrabold text-3xl text-gray-900">
                 Danh sách công việc
             </h2>
-            <div class="ml-6">
-                <a href="/task/list" matTooltip="Tải lại trang" mat-stroked-button
-                    class="btn-white btn-square bg-white">
-                    <mat-icon>sync</mat-icon>
-                </a>
-
-                <button matTooltip="Xóa công việc" [disabled]="!selection.hasValue()" mat-stroked-button
-                    class="btn-white btn-square bg-white ml-3.5s" id="deleteButton" (click)="deleteTask()">
-                    <mat-icon>delete_outline</mat-icon>
-                </button>
-            </div>
-            <!-- [formControl]="keySearch" (keyup.enter)="onSearch()" -->
-            <div class="flex justify-center h-2/4 ml-4">
-                <div class="flex border-2 rounded">
-                    <input type="text" class="px-4 py-2 w-80" placeholder="Tìm kiếm..." [formControl]="keySearch"
-                        (keyup.enter)="onSearch()">
-                    <button (click)="onSearch()" class="flex items-center justify-center px-4 border-l
-                        hover:bg-gray-300 focus:outline-none focus:ring-2
-                        focus:ring-offset-2 focus:ring-indigo-500">
-                        <svg class="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42
-                                1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0
-                                0-12
-                                6 6 0 0 0 0 12z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
         </div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
 
-            <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                        [checked]="selection.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()">
-                    </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                        [checked]="selection.isSelected(row)">
-                    </mat-checkbox>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
-                text-xs text-gray-900
-                uppercase tracking-wider" mat-sort-header="name"> Tên khách hàng
-                </th>
-                <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
-                element">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" [src]="element.userAvatar" alt="">
-                        </div>
-                        <div class="ml-4">
-                            <div class="text-sm font-medium
-                            text-gray-900">
-                                {{element.userName}}
+        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <ul role="list" class="divide-y divide-gray-200">
+                <li *ngFor="let item of taskList">
+                    <a (click)="openDialogEditTask(item.id, item.status)" class="block hover:bg-gray-50">
+                        <div class="px-4 py-4 flex items-center sm:px-6">
+                            <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div class="truncate">
+                                    <div class="py-2">
+                                        <span class="px-2 inline-flex text-xs
+                                        leading-5 font-semibold rounded-full
+                                        bg-red-200 text-green-800" *ngIf="item.status == 'Đã tạo'">
+                                            {{item.status}}
+                                        </span>
+                                        <span class="px-2 inline-flex text-xs
+                                        leading-5 font-semibold rounded-full
+                                        bg-yellow-200 text-green-800" *ngIf="item.status == 'Đã giao NV'">
+                                            {{item.status}}
+                                        </span>
+                                        <span class="px-2 inline-flex text-xs
+                                        leading-5 font-semibold rounded-full
+                                        bg-yellow-200 text-green-800" *ngIf="item.status == 'Chưa giao NV'">
+                                            {{item.status}}
+                                        </span>
+                                        <span class="px-2 inline-flex text-xs
+                                        leading-5 font-semibold rounded-full
+                                        bg-gray-600 text-white" *ngIf="item.status == 'Đã huỷ'">
+                                            {{item.status}}
+                                        </span>
+                                        <span class="px-2 inline-flex text-xs
+                                        leading-5 font-semibold rounded-full
+                                        bg-blue-100 text-green-800" *ngIf="item.status == 'Hoàn thành'">
+                                            {{item.status}}
+                                        </span>
+                                    </div>
+                                    <div class="flex text-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                        </svg>
+                                        <p class="ml-2 font-medium text-indigo-600 truncate">{{item.address}}</p>
+                                        
+                                    </div>
+                                    <div class="mt-2 flex">
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <p>
+                                                Ngày
+                                                <time datetime="2020-01-07"> {{item.workDate}} Từ {{item.startTime}} Đến
+                                                    {{item.endTime}}</time>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                                <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                                    <div class="flex overflow-hidden -space-x-1">
+                                        <div *ngFor="let avatar of item.employeeAvatar">
+                                            <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                                                [src]="avatar" alt="Lindsay Walton">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="ml-5 flex-shrink-0">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            
                         </div>
-                    </div>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="work_date">
-                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
-                text-xs text-gray-900
-                uppercase tracking-wider" mat-sort-header="work_date"> Ngày làm
-                </th>
-                <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
-                element">
-                    <div class="text-sm text-gray-900 flex">
-                        {{element.workDate}}
-                    </div>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="start_time">
-                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
-                text-xs text-gray-900
-                uppercase tracking-wider" mat-sort-header="start_time"> Thời gian bắt đầu
-                </th>
-                <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
-                element">
-                    <div class="text-sm text-gray-900">{{element.startTime}}</div>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="end_time">
-                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
-                text-xs text-gray-900
-                uppercase tracking-wider" mat-sort-header="end_time"> Thời gian kết thúc
-                </th>
-                <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
-                element">
-                    {{element.endTime}}
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
-                text-xs text-gray-900
-                uppercase tracking-wider" mat-sort-header="status"> Trạng thái
-                </th>
-                <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
-                element">
-                    <span class="px-2 inline-flex text-xs
-                    leading-5 font-semibold rounded-full
-                    bg-red-200 text-green-800" *ngIf="element.status == 'Đã tạo'">
-                        {{element.status}}
-                    </span>
-                    <span class="px-2 inline-flex text-xs
-                    leading-5 font-semibold rounded-full
-                    bg-yellow-200 text-green-800" *ngIf="element.status == 'Đã giao NV'">
-                        {{element.status}}
-                    </span>
-                    <span class="px-2 inline-flex text-xs
-                    leading-5 font-semibold rounded-full
-                    bg-yellow-200 text-green-800" *ngIf="element.status == 'Chưa giao NV'">
-                        {{element.status}}
-                    </span>
-                    <span class="px-2 inline-flex text-xs
-                    leading-5 font-semibold rounded-full
-                    bg-gray-600 text-white" *ngIf="element.status == 'Đã huỷ'">
-                        {{element.status}}
-                    </span>
-                    <span class="px-2 inline-flex text-xs
-                    leading-5 font-semibold rounded-full
-                    bg-blue-100 text-green-800" *ngIf="element.status == 'Hoàn thành'">
-                        {{element.status}}
-                    </span>
-                </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="detail">
-                <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
-                text-xs text-gray-900
-                uppercase tracking-wider">Chi tiết</th>
-                <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button [matMenuTriggerFor]="editMenu" #menuTrigger="matMenuTrigger"
-                        (click)="menuTrigger.openMenu()" (mouseenter)="menuTrigger.openMenu()">
-                        <mat-icon class="white-icon">edit</mat-icon>
-
-                    </button>
-                    <mat-menu #editMenu="matMenu" xPosition="before" [overlapTrigger]="true">
-                        <span>
-                            <button mat-menu-item (click)="openDialogEditTask(element.id, element.status)">
-                                <mat-icon>edit</mat-icon>
-                                <span class="text-sm text-gray-700">Chỉnh sửa thông tin</span>
-                            </button>
-                            <button mat-menu-item *ngIf="element.status == 'Đã giao NV'" (click) = "doneTask(element.id, element.status)">
-                                <mat-icon>done_all</mat-icon>
-                                <span class="text-sm text-gray-700">Đánh dấu hoàn thành</span>
-                            </button>
-                            <button mat-menu-item (click) = "cancelTask(element.id, element.status)">
-                                <mat-icon>clear</mat-icon>
-                                <span class="text-sm text-gray-700">Huỷ công việc</span>
-                            </button>
-                        </span>
-                    </mat-menu>
-
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
-        </table>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <mat-paginator (page)="onPaging($event)" [length]="totalRow" [pageSizeOptions]="arrayPageSize"
             [showFirstLastButtons]="true">

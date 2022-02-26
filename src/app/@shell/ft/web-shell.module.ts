@@ -19,8 +19,8 @@ const APP_ROUTES: Routes = [
   {
     path: ROUTER_UTILS.config.base.home,
     loadChildren: async () =>
-    (await import('@pages/dashboard/dashboard.module')).DashboardModule,
-    canLoad: [AuthGuard],
+    (await import('@pages/home/home.module')).HomeModule,
+    canLoad: [NoAuthGuard],
 
   },
   {

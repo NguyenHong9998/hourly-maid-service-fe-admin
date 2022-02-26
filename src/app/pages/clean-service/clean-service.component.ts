@@ -7,12 +7,13 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogCreateServiceComponent } from '@components/dialog-create-service/dialog-create-service.component';
+import { DialogEditDiscountServiceComponent } from '@components/dialog-edit-discount-service/dialog-edit-discount-service.component';
 import { DialogEditServiceComponent } from '@components/dialog-edit-service/dialog-edit-service.component';
 import { DialogListDiscountServiceComponent } from '@components/dialog-list-discount-service/dialog-list-discount-service.component';
 import { DialogListEmployeeServiceComponent } from '@components/dialog-list-employee-service/dialog-list-employee-service.component';
 import { environment } from '@env/environment';
 import { CustomSnackbarService } from '@pages/auth/services/custom-snackbar.service';
-import { CleanServiceListDomain } from './clean-service-list.domain';
+import { CleanServiceListDomain, DiscountOfService } from './clean-service-list.domain';
 
 @Component({
   selector: 'app-clean-service',
@@ -26,7 +27,7 @@ export class CleanServiceComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
 
   dataSource!: MatTableDataSource<CleanServiceListDomain>;
-  notifyList: Array<CleanServiceListDomain> = [];
+  serviceList: Array<CleanServiceListDomain> = [];
 
   totalRow: number = 10;
   isLoading !: boolean;
@@ -50,7 +51,7 @@ export class CleanServiceComponent implements OnInit {
     this.getListService();
   }
 
-  
+
 
   getListService() {
 
@@ -86,12 +87,22 @@ export class CleanServiceComponent implements OnInit {
         const banner = data[i].banner;
         const price = data[i].price;
         const createDate = data[i].create_date;
-        const domain = new CleanServiceListDomain(id, position, name, banner, price, note, createDate);
+        const introduce = data[i].introduces;
+        const advantage = data[i].advantage;
+        const numtask = data[i].num_task;
+
+        const discountList = new Array<DiscountOfService>();
+        const disounts = data[i].discounts;
+        for (let j = 0; j < disounts.length; j++) {
+          const discountOfService = new DiscountOfService(disounts[j].id, disounts[j].banner, disounts[j].title, disounts[j].end_time, disounts[j].sale_percentage);
+          discountList.push(discountOfService);
+        }
+        const domain = new CleanServiceListDomain(id, position, name, banner, price, note, createDate, introduce, advantage, numtask, discountList);
 
         result.push(domain);
       }
-      this.notifyList = result;
-      this.dataSource = new MatTableDataSource<CleanServiceListDomain>(this.notifyList);
+      this.serviceList = result;
+      this.dataSource = new MatTableDataSource<CleanServiceListDomain>(this.serviceList);
     }
   }
 
@@ -118,11 +129,11 @@ export class CleanServiceComponent implements OnInit {
   clearSort() {
     this.sort.sort({ id: '', start: 'asc', disableClear: false });
     this.sortObj = {
-        active: '',
-        direction: '',
+      active: '',
+      direction: '',
     };
     this.paginator.pageIndex = 0;
-}
+  }
 
 
 
@@ -181,5 +192,13 @@ export class CleanServiceComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
+  }
+
+  openDialogEditDiscounrService(discountId: any) {
+    const data = {discountId}
+    const dialogref = this.dialog.open(DialogEditDiscountServiceComponent, {data});
+    dialogref.afterClosed().subscribe(() => {
+
+    })
   }
 }

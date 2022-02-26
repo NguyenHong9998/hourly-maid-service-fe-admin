@@ -25,6 +25,7 @@ import { DialogEditLeaveDateComponent } from './dialog-edit-leave-date/dialog-ed
 import { DialogChangeStatusDiscountComponent } from './dialog-change-status-discount/dialog-change-status-discount.component';
 import { DialogCancelTaskComponent } from './dialog-cancel-task/dialog-cancel-task.component';
 import { DialogDoneTaskComponent } from './dialog-done-task/dialog-done-task.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DialogDoneTaskComponent } from './dialog-done-task/dialog-done-task.com
         DialogChangeStatusDiscountComponent,
         DialogCancelTaskComponent,
         DialogDoneTaskComponent,
+        StarRatingComponent,
     ],
     imports: [
         MatSnackBarModule,

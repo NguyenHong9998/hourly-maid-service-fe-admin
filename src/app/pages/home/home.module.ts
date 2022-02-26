@@ -1,12 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { MaterialExampleModule } from 'src/app/material.module';
 import { HomePage } from './home.page';
 
 @NgModule({
   declarations: [HomePage],
   imports: [
     CommonModule,
+     MaterialExampleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SlickCarouselModule,
     RouterModule.forChild([
       {
         path: '',

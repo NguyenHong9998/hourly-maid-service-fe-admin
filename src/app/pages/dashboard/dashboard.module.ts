@@ -21,7 +21,7 @@ import { DashboardPage } from './dashboard.page';
     
     RouterModule.forChild([
       {
-        path: '',
+        path: '/dasboard',
         component: DashboardPage,
         data: {
           title: 'Dashboard',

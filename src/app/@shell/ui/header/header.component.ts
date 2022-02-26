@@ -118,6 +118,8 @@ export class HeaderComponent implements OnInit {
         let avatar = (data as any).data.avatar;
         console.log("Avatarrrrr: " + avatar);
         this.avatar = avatar;
+        this.cdr.markForCheck();
+
       })
     }
     var indexActive = this.tokenStorageService.getActiveIndexHeader();

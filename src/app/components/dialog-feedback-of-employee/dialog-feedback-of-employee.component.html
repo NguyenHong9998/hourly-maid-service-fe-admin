@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="w-1/5 pl-3 text-gray-700">
-                    <span class="text-sm">{{item.percent}}%</span>
+                    <span class="text-sm font-bold">{{item.percent}}%</span>
                 </div>
             </div>
 
@@ -31,46 +31,64 @@
     </div>
     <div class="w-full px-4 pb-4">
         <h3 class="font-medium tracking-tight">Góp ý nhân viên</h3>
-        <div *ngIf="feedback?.length">
-            <div *ngFor="let item of feedback">
-                <div class="flex">
-                    <div class="w-12 h-12 mt-1">
-                        <img class="inline object-cover w-full h-full rounded-full" src="item.avatarUser"
-                            alt="Profile image" />
-                    </div>
-                    <div class="ml-3 flex-1">
-                        <div class="flex">
-                            <span>{{item.username}}</span>
-                            <div class="ml-40" *ngFor="let star of stars">
-                                <mat-icon class="star" *ngIf="stars.indexOf(star) < item.voteNum">star</mat-icon>
-                                <mat-icon class="star" *ngIf="stars.indexOf(star) >= item.voteNum">star</mat-icon>
+        <div class="flex items-start space-x-4 pb-">
+            <div class="flex-shrink-0">
+                <img class="inline-block h-10 w-10 rounded-full"
+                    src="../../../assets/img/add_icon.jpeg"
+                    alt="">
+            </div>
+            <div class="min-w-0 flex-1">
+                <form class="relative">
+                    <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden ">
+                        <label for="comment" class="sr-only">Add your comment</label>
+                        <textarea rows="3" name="comment" id="comment"
+                            class="block w-full py-3 border-0 resize-none  sm:text-sm px-4"
+                            placeholder="Add your comment..." [(ngModel)]="feedbackContent"></textarea>
 
+                        <div class="py-2" aria-hidden="true">
+                            <div class="py-px">
+                                <div class="h-9"></div>
                             </div>
                         </div>
-                        <div>
-                            <p class="py-1 text-sm text-gray-700">{{item.content}}</p>
+                    </div>
+
+                    <div class="absolute bottom-0 inset-x-0 pl-3 pr-2 py-2 flex justify-between">
+                        <div class="flex items-center space-x-5">
+                            <app-star-rating [rating]="rating" [starCount]="starCount" 
+                                (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button (click) = "addFeedback()"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Nhận xét
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="my-10">
+                    <div class="flex text-sm  space-x-4" *ngFor="let item of feedback">
+                        <div class="flex-none py-5">
+                            <img [src]="item.avatarUser" alt="" class="w-10 h-10 bg-gray-100 rounded-full">
+                        </div>
+                        <div class="flex-1 py-5">
+                            <h5 class="font-medium text-gray-900">{{item.username}}</h5>
+                            <p><time datetime="2021-07-16" class="text-gray-500">{{item.createDate}}</time></p>
+                            <div class="flex items-center space-x-5">
+                                <app-star-rating [rating]="item.voteNum" [starCount]="starCount" ></app-star-rating>
+                            </div>
+                            <div class="mt-4 prose prose-sm max-w-none ">
+                                <p>{{item.content}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="hidden sm:block pt-1" aria-hidden="true">
-                    <div class="border-t border-gray-200"></div>
-                </div>
             </div>
         </div>
-        <div class="bg-red-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert"
-            *ngIf="!feedback?.length">
-            <div class="flex">
-                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                    </svg></div>
-                <div>
-                    <p class="font-bold">Không tìm thấy dữ liệu</p>
-                    <p class="text-sm">Không có góp ý nào của khách hàng về nhân viên</p>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

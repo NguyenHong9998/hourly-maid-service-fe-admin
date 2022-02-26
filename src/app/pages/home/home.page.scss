@@ -1,0 +1,31 @@
+
+#book_tag {
+background-color: rgb(37, 233, 70);
+}
+
+.slick-slider {
+    width: 88%;
+    margin: auto;
+    // background: white;
+}
+  
+.slick-list {margin: 0 -5px;}
+.slick-slide {padding: 0 20px;}
+
+ .slick-prev, 
+ .slick-next {
+    height: 45px;
+    width: 40px;
+    background: rgb(250, 6, 6) !important;
+    z-index: 100;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: "slick";
+    font-size: 20px;
+    line-height: 1;
+    color: #cf1313 !important;
+    opacity: 0.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
