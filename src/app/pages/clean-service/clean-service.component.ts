@@ -35,8 +35,9 @@ export class CleanServiceComponent implements OnInit {
   arrayPageSize = [10, 20, 30];
   sortObj!: Sort;
   mapPageToken = new Map();
-  status!: string;
+  status: string = 'Đã cung cấp';
   offset !: number;
+  isVerifyPhone : boolean = false;
 
   pageSize = this.arrayPageSize[0];
 
@@ -201,4 +202,6 @@ export class CleanServiceComponent implements OnInit {
 
     })
   }
+
+  
 }

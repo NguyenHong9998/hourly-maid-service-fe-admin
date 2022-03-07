@@ -2,12 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogVerifyEmailComponent } from '@components/dialog-verify-email/dialog-verify-email.component';
 import { environment } from '@env/environment';
 import { CustomSnackbarService } from '@pages/auth/services/custom-snackbar.service';
+import { TokenStorageService } from '@pages/auth/services/token-storage.service';
 import { format } from 'date-fns';
 import { ListEmployeeCreateTaskDomain } from './employee-list-domain';
 import { ListSelectServiceTaskDomain } from './service-list-domain';
@@ -55,6 +57,7 @@ export class DialogCreateTaskComponent implements OnInit {
   dataSource !: MatTableDataSource<PriceList>;
   priceList: Array<PriceList> = [];
   numberOfemployee: number = 1;
+  isVerifyEmail: boolean = false;
 
   totalMoney !: number;
 
@@ -93,8 +96,8 @@ export class DialogCreateTaskComponent implements OnInit {
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
-  constructor(public dialogRef: MatDialogRef<DialogCreateTaskComponent>,
-    private formBuilder: FormBuilder, public http: HttpClient, public snackbar: CustomSnackbarService
+  constructor(public dialogRef: MatDialogRef<DialogCreateTaskComponent>, public tokenStorage: TokenStorageService,
+    private formBuilder: FormBuilder, public http: HttpClient, public snackbar: CustomSnackbarService, private dialog: MatDialog
   ) {
 
   }
@@ -179,6 +182,7 @@ export class DialogCreateTaskComponent implements OnInit {
       this.customerName = data.data.name;
       this.customerPhone = data.data.phone;
       this.email = data.data.email;
+      this.isVerifyEmail = data.data.verify_email;
     })
   }
 
@@ -199,7 +203,6 @@ export class DialogCreateTaskComponent implements OnInit {
     } else {
       this.validTime = true;
     }
-
   }
 
   checkPriceList() {
@@ -238,6 +241,11 @@ export class DialogCreateTaskComponent implements OnInit {
   getTotalMoney() {
     return this.numberOfemployee * this.totalMoney;
   }
+  sendCodeVerifyEmail() {
+    const data = { email: this.tokenStorage.getUser().email }
+    this.http.post(environment.apiUrl + '/user/send-verify-email', data).subscribe((data: any) => {
+    })
+  }
 
   onCreateTask() {
     const start = format(new Date(), "yyyy-MM-dd") + " " + this.startTime + ":00";
@@ -253,10 +261,29 @@ export class DialogCreateTaskComponent implements OnInit {
       end_time: end,
       num_of_employee: this.numberOfemployee
     }
-    this.http.post(environment.apiUrl + "/task", body).subscribe((data) => {
-      this.snackbar.success("Tạo mới thành công");
-      this.stepper.next();
-    })
+    if (!this.isVerifyEmail) {
+      const data = { email: this.tokenStorage.getUser().email }
+      this.http.post(environment.apiUrl + '/user/send-verify-email', data).subscribe((data: any) => {
+
+      })
+      const dialogref = this.dialog.open(DialogVerifyEmailComponent);
+      dialogref.afterClosed().subscribe(data => {
+
+        if (data.verify_email) {
+          this.http.post(environment.apiUrl + "/task", body).subscribe((data) => {
+            this.snackbar.success("Tạo mới thành công");
+            this.stepper.next();
+          })
+        }
+      })
+    } else {
+
+      this.http.post(environment.apiUrl + "/task", body).subscribe((data) => {
+        this.snackbar.success("Tạo mới thành công");
+        this.stepper.next();
+      })
+    }
+
   }
 
 }
