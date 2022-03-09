@@ -316,25 +316,4 @@ export class DashboardPage {
     })
   }
 
-  getUserOverviewDetail(){
-    const start = format(this.campaignThree.get('start')?.value, "yyyy-MM-dd");
-    const end = format(this.campaignThree.get('end')?.value, "yyyy-MM-dd");
-
-    let params = new HttpParams()
-      .set('start_date', start)
-      .set('end_date', end);
-    this.http.get(environment.apiUrl + "/user/overview/detail", { params: params }).subscribe((data: any) => {
-      const details = data.data;
-      const labels = new Array();
-      const datasSet = [];
-      for (let i = 0; i < details.length; i++) {
-        labels.push(details[i].full_name);
-        datasSet.push(details[i].num_star);
-      }
-      const barChartDataUser = [{ barPercentage: 0.3, data: datasSet, label: 'Số sao' }];
-      this.barChartData = barChartDataUser;
-      this.barChartLabels = labels;
-
-    })
-  }
 }
