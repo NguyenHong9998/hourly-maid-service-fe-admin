@@ -7,7 +7,12 @@
 </div>
 
 <div class="example-container ">
+<<<<<<< HEAD
     <table mat-table [dataSource]="dataSource">
+=======
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" *ngIf="dataSource?.data?.length">
+
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
                 text-xs text-gray-900
@@ -36,9 +41,19 @@
             </th>
             <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
                 element">
+<<<<<<< HEAD
                 <div class="flex items-center space-x-5">
                     <app-star-rating [rating]="element.level" [starCount]="5"
                         (ratingUpdated)="onRatingChanged($event, element.id)"></app-star-rating>
+=======
+                <!-- <div class="flex">
+                    <div *ngFor="let star of stars">
+                        <mat-icon *ngIf="stars.indexOf(star) < element.level" class="star">star</mat-icon>
+                    </div>
+                </div> -->
+                <div class="flex items-center space-x-5">
+                    <app-star-rating [rating]="element.level" [starCount]="5"></app-star-rating>
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
                 </div>
             </td>
         </ng-container>
@@ -57,7 +72,20 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky :true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">
     </table>
+<<<<<<< HEAD
 
+=======
+    <div class="bg-red-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-4" role="alert" *ngIf="!dataSource?.data?.length">
+        <div class="flex">
+          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+          <div>
+            <p class="font-bold">Không tìm thấy dữ liệu</p>
+            <p class="text-sm">Chưa có nhân viên nào đánh giá kinh nghiệm theo dịch vụ này</p>
+          </div>
+        </div>
+      </div>
+    
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
 </div>
 <div class="hidden sm:block" aria-hidden="true">
     <div class="border-t border-gray-200"></div>

@@ -7,11 +7,28 @@
 
 
     </div>
+<<<<<<< HEAD
 
     <div class="h-32 md:h-auto md:w-1/4">
         <button (click)="setExperence()"
             class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
             Đánh giá mức kinh nghiệm
+=======
+    <div class="h-32 md:h-auto md:w-2/3">
+        <a href="/service/list" matTooltip="Tải lại trang" mat-stroked-button
+            class="btn-white btn-square bg-white ml-4">
+            <mat-icon>sync</mat-icon>
+        </a>
+
+        <button matTooltip="Thêm mới dịch vụ" id="addButton" (click)="openDialogCreateService()" mat-stroked-button
+            class="btn-white btn-square bg-white ml-4">
+            <mat-icon>playlist_add</mat-icon>
+        </button>
+
+        <button matTooltip="Xóa dịch vụ" [disabled]="!selection.hasValue()" mat-stroked-button id="deleteButton"
+            class="btn-white btn-square bg-white ml-3.5">
+            <mat-icon>delete_outline</mat-icon>
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
         </button>
     </div>
 
@@ -38,12 +55,20 @@
     <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+<<<<<<< HEAD
                 [indeterminate]="selection.hasValue() && !isAllSelected()" [disabled]="true">
+=======
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
             </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
             <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+<<<<<<< HEAD
                 [checked]="selection.isSelected(row)" [disabled]="true">
+=======
+                [checked]="selection.isSelected(row)">
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
             </mat-checkbox>
         </td>
     </ng-container>
@@ -83,7 +108,7 @@
     <ng-container matColumnDef="note">
         <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
             text-xs text-gray-900
-            uppercase tracking-wider" mat-sort-header="note"> Ghi chú
+            uppercase tracking-wider truncate" mat-sort-header="note"> Ghi chú
         </th>
         <td class="px-6 py-4 whitespace-nowrap" mat-cell *matCellDef="let
             element">
@@ -95,6 +120,7 @@
     <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef class="px-6 py-3 text-left
             text-xs text-gray-900
+<<<<<<< HEAD
             uppercase tracking-wider" mat-sort-header="create_date"> Trạng thái </th>
         <td mat-cell *matCellDef="let element">
             <span class="{{element.status == 'Đã cung cấp' ? 'px-2 inline-flex
@@ -105,6 +131,19 @@
                 bg-red-200 text-green-800' }}" >
                 {{element.status}}
             </span> </td>
+=======
+            uppercase tracking-wider" mat-sort-header="status"> Trạng thái </th>
+        <td mat-cell *matCellDef="let element">
+            <span class="{{element.status == 'Đã cung cấp' ? 'px-2 inline-flex
+                    text-xs
+                    leading-5 font-semibold rounded-full
+                    bg-green-100 text-green-800' : 'px-2 inline-flex text-xs
+                    leading-5 font-semibold rounded-full
+                    bg-red-200 text-green-800' }}" (click) = "changeStatusOfService(element.id, element.status, element.banner, element.name)">
+                {{element.status}}
+            </span>
+        </td>
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
     </ng-container>
 
     <ng-container matColumnDef="detail">
@@ -123,12 +162,19 @@
                         element.name)">
                         Xem thông tin
                     </a>
+<<<<<<< HEAD
 
                     <a mat-menu-item (click)="openDialogListEmployee(element.id,
                     element.name)">
                         Xem danh sách nhân viên
                     </a>
 
+=======
+                    <a mat-menu-item (click)="openDialogListEmployee(element.id,
+                        element.name)">
+                        Xem danh sách nhân viên
+                    </a>
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
                     <a mat-menu-item (click)="openDialoglistDiscountService(element.id,
                         element.name)">
                         Xem chương trình giảm giá

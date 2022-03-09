@@ -54,6 +54,7 @@ export class DialogListEmployeeServiceComponent implements OnInit {
   }
 
   getListItemsEmloyeeServices() {
+<<<<<<< HEAD
     this.http.get(environment.apiUrl + "/user/experience/" + this.tokenStorage.getUser().user_id).subscribe((data: any) => {
       const list = data.data;
       const employeeList = new Array<EmployeeService>();
@@ -73,6 +74,18 @@ export class DialogListEmployeeServiceComponent implements OnInit {
       }
     }
   }
+=======
+    const employee = new Array<EmployeeService>();
+    let params = new HttpParams()
+      .set('column_sort', this.sortObj && this.sortObj.direction ? this.sortObj.active.toUpperCase() : '')
+      .set('type_sort', this.sortObj ? this.sortObj.direction.toUpperCase() : '');
+    this.http.get(environment.apiUrl + "/service/" + this.data.serviceId + "/employee", { params: params }).subscribe(data => {
+      const list = (data as any).data;
+      for (let i = 0; i < list.length; i++) {
+        const avatar = list[i].user_avatar;
+        const name = list[i].user_name;
+        const level = list[i].level;
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
 
   onSave() {
     const listExperience: { service_id: string; level: number; }[] = [];
@@ -81,6 +94,7 @@ export class DialogListEmployeeServiceComponent implements OnInit {
         service_id: t.id,
         level: t.level
       }
+<<<<<<< HEAD
       listExperience.push(item);
     })
     const employeeId = this.tokenStorage.getUser().user_id;
@@ -88,6 +102,9 @@ export class DialogListEmployeeServiceComponent implements OnInit {
       employee_service: listExperience,
       employee_id: employeeId
     }
+=======
+      this.employeeList = employee;
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
 
     this.http.post(environment.apiUrl + "/user/employee/experience", body).subscribe((data: any) => {
       this.snackbar.success("Cập nhật thành công")

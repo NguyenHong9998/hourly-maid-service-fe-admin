@@ -47,14 +47,16 @@ export class DialogCreateTaskComponent implements OnInit {
   minDate = new Date();
 
   service = new FormControl();
-  serviceList !: Array<ListSelectServiceTaskDomain>;
-  selectedService: any;
+  serviceList: Array<ListSelectServiceTaskDomain> = [];
+  selectedService: any = [];
   isExistClient: boolean = true;
   disableNext: boolean = false;
   checkbox: boolean = false;
   dataSource !: MatTableDataSource<PriceList>;
   priceList: Array<PriceList> = [];
   numberOfemployee: number = 1;
+
+  availableEmployee: boolean = false;
 
   totalMoney !: number;
 
@@ -142,7 +144,7 @@ export class DialogCreateTaskComponent implements OnInit {
     let params = new HttpParams()
       .set('offset', 0)
       .set('limit', 1000)
-      .set('status', '')
+      .set('status', 'Đã cung cấp')
       .set('value_search', '')
       .set('column_sort', '')
       .set('type_sort', '');
@@ -207,6 +209,25 @@ export class DialogCreateTaskComponent implements OnInit {
 
   }
 
+  isOptionDisabled(opt: any) {
+    return this.selectedService.length >= 1 && !this.selectedService.find((el: any) => el.id == opt.id)
+  }
+
+  onChange(event: any) {
+    const start = format(this.date.value, "yyyy-MM-dd") + " " + this.startTime + ":00";
+    const end = format(this.date.value, "yyyy-MM-dd") + " " + this.endTime + ":00";
+    const serviceId = event.value.id;
+    let params = new HttpParams()
+      .set('start_time', start)
+      .set('end_time', end)
+      .set('service_id', serviceId)
+    this.http.get(environment.apiUrl + "/task/check-employee", { params: params }).subscribe((data: any) => {
+      const list = data.data;
+      this.availableEmployee = list.length >=1 ? true : false;
+    })
+
+  }
+
   checkPriceList() {
     const start = format(new Date(), "yyyy-MM-dd") + " " + this.startTime + ":00";
     const end = format(new Date(), "yyyy-MM-dd") + " " + this.endTime + ":00";
@@ -249,19 +270,20 @@ export class DialogCreateTaskComponent implements OnInit {
     const end = format(new Date(), "yyyy-MM-dd") + " " + this.endTime + ":00";
     const serviceIds = this.selectedService.map((x: any) => x.id);
     const body = {
-      email : this.email,
-      phone : this.customerPhone,
-      address : this.address,
-      user_name :this.customerName,
+      email: this.email,
+      phone: this.customerPhone,
+      address: this.address,
+      user_name: this.customerName,
       service_id: serviceIds,
       start_time: start,
       end_time: end,
       num_of_employee: this.numberOfemployee
     }
-    this.http.post(environment.apiUrl + "/task", body).subscribe((data) =>{
+    this.http.post(environment.apiUrl + "/task", body).subscribe((data) => {
       this.snackbar.success("Tạo mới thành công");
       this.stepper.next();
     })
   }
 
+  
 }

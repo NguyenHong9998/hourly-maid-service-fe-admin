@@ -18,7 +18,7 @@
                                 Tiêu đề
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="service-name" id="service-name" autocomplete="given-name"
+                                <input type="text" name="service-name" id="in" autocomplete="given-name"
                                     class="w-full px-4 py-2 text-sm
                                     border
                                     rounded-md focus:border-blue-400
@@ -36,7 +36,11 @@
                             <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500
                                 focus:border-indigo-500 mt-1 block
                                 w-full sm:text-sm border border-gray-300 py-2 px-4
+<<<<<<< HEAD
                                 rounded-md" formControlName="content" [attr.disabled] ="true"></textarea>
+=======
+                                rounded-md" formControlName="content" [disabled]="status == 'Đã gửi'" id="in"></textarea>
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
                         </div>
 
                     </div>

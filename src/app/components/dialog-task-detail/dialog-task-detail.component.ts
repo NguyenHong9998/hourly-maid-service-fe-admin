@@ -74,7 +74,6 @@ export class DialogTaskDetailComponent implements OnInit {
   numberOfemployee: number = 1;
   employeeList: Array<Employee> = [];
   selectedEmployee: any = [];
-
   totalMoney !: number;
   displayedColumns: string[] = ['service', 'service_price', 'hours', 'discount', 'percent', 'price'];
 
@@ -134,6 +133,7 @@ export class DialogTaskDetailComponent implements OnInit {
       this.numberOfemployee = data.data.num_of_employee;
       this.startTime = data.data.start_time;
       this.endTime = data.data.end_time;
+      this.selectedService = data.data.service_id;
 
       const pricesList = data.data.price_list.price_list;
 
@@ -152,20 +152,17 @@ export class DialogTaskDetailComponent implements OnInit {
       this.priceList = priceListArray;
       this.dataSource = new MatTableDataSource<PriceList>(this.priceList);
       const list = data.data.price_list.employees;
-      if (list.length != 0) {
-        for (let i = 0; i < list.length; i++) {
-          const id = list[i].id;
-          const employeeAvatar = list[i].avatar;
-          const employeeName = list[i].full_name;
-          const employeeEmail = list[i].email;
-          const employeePhone = list[i].phone;
-          employeesList.push(new Employee(id, employeeAvatar, employeeName, employeeEmail, employeePhone))
-        }
-        this.selectedEmployee = employeesList;
-
-      } else {
-        this.getListEmployee();
+      for (let i = 0; i < list.length; i++) {
+        const id = list[i].id;
+        const employeeAvatar = list[i].avatar;
+        const employeeName = list[i].full_name;
+        const employeeEmail = list[i].email;
+        const employeePhone = list[i].phone;
+        employeesList.push(new Employee(id, employeeAvatar, employeeName, employeeEmail, employeePhone))
       }
+      this.selectedEmployee = employeesList;
+
+      this.getListEmployee();
 
       const progressList = new Array<TaskProgress>();
       for (let i = 0; i < data.data.progress.length; i++) {
@@ -184,28 +181,31 @@ export class DialogTaskDetailComponent implements OnInit {
   getListEmployee() {
     const start = format(this.date.value, "yyyy-MM-dd") + " " + this.startTime + ":00";
     const end = format(this.date.value, "yyyy-MM-dd") + " " + this.endTime + ":00";
+    const serviceId = this.selectedService;
     let params = new HttpParams()
       .set('start_time', start)
       .set('end_time', end)
+      .set('service_id', serviceId)
+      .set('task_id', this.data.taskId)
+
     this.http.get(environment.apiUrl + "/task/check-employee", { params: params }).subscribe((data: any) => {
       const list = data.data;
       const employeesList = new Array<Employee>();
-      if (list.length != 0) {
-        for (let i = 0; i < list.length; i++) {
-          const id = list[i].id;
-          const employeeAvatar = list[i].avatar;
-          const employeeName = list[i].full_name;
-          const employeeEmail = list[i].email;
-          const employeePhone = list[i].phone;
-          employeesList.push(new Employee(id, employeeAvatar, employeeName, employeeEmail, employeePhone))
-        }
-        this.employeeList = employeesList;
+      for (let i = 0; i < list.length; i++) {
+        const id = list[i].id;
+        const employeeAvatar = list[i].avatar;
+        const employeeName = list[i].full_name;
+        const employeeEmail = list[i].email;
+        const employeePhone = list[i].phone;
+        employeesList.push(new Employee(id, employeeAvatar, employeeName, employeeEmail, employeePhone))
       }
+      this.employeeList = employeesList;
+      console.log(this.employeeList);
     })
   }
 
   isOptionDisabled(opt: any) {
-    return this.selectedEmployee.length >= this.numberOfemployee && !this.selectedEmployee.find((el: any) => el.id == opt.id)
+    return this.selectedEmployee.length >= 1 && !this.selectedEmployee.find((el: any) => el.id == opt.id)
   }
 
   onAssignListEmployee() {

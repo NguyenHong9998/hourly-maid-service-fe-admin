@@ -96,7 +96,6 @@ export class MyProfilePage {
       }
       this.role = (data as any).data.role;
       this.status = (data as any).data.status;
-      console.log("xxxxxxx: " + status);
 
       this.avatar = avatar;
     })

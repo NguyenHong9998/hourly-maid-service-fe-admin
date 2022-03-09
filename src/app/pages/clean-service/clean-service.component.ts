@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogChangeStatusServiceComponent } from '@components/dialog-change-status-service/dialog-change-status-service.component';
 import { DialogCreateServiceComponent } from '@components/dialog-create-service/dialog-create-service.component';
 import { DialogEditServiceComponent } from '@components/dialog-edit-service/dialog-edit-service.component';
 import { DialogEmployeeServiceInformComponent } from '@components/dialog-employee-service-inform/dialog-employee-service-inform.component';
@@ -185,11 +186,20 @@ export class CleanServiceComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   setExperence() {
     const dialogref = this.dialog.open(DialogListEmployeeServiceComponent);
     dialogref.afterClosed().subscribe(() => {
 
     })
 
+=======
+  changeStatusOfService(serviceId: any, status: any, banner : any, name : any) {
+    const data = { serviceId , status, banner, name}
+    const dialofRef = this.dialog.open(DialogChangeStatusServiceComponent, { data});
+    dialofRef.afterClosed().subscribe(() => {
+      this.getListService();
+    })
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
   }
 }

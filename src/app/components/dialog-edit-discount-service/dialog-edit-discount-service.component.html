@@ -302,7 +302,7 @@
 
 
 <div class="border-b-orange-600" id="title">
-    <h1 mat-dialog-title class="text-center">Thêm mới chương trình giảm giá
+    <h1 mat-dialog-title class="text-center">Chỉnh sửa chương trình giảm giá
     </h1>
 </div>
 <div class="hidden sm:block" aria-hidden="true">
@@ -326,7 +326,7 @@
                                     border
                                     rounded-md focus:border-blue-400
                                     focus:outline-none focus:ring-1
-                                    focus:ring-blue-600" formControlName="name">
+                                    focus:ring-blue-600" formControlName="name" id="in">
                             </div>
                         </div>
                     </div>
@@ -339,7 +339,7 @@
                             <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500
                                 focus:border-indigo-500 mt-1 block
                                 w-full sm:text-sm border border-gray-300 py-2 px-4
-                                rounded-md" formControlName="note"></textarea>
+                                rounded-md" formControlName="note" id="in"></textarea>
                         </div>
 
                     </div>
@@ -356,7 +356,7 @@
                                         border
                                         rounded-md focus:border-blue-400
                                         focus:outline-none focus:ring-1
-                                        focus:ring-blue-600" formControlName="start">
+                                        focus:ring-blue-600" formControlName="start" id="in">
                                     <span class="trigger pt-2" [owlDateTimeTrigger]="dt1">
                                         <mat-icon>calendar_today</mat-icon>
                                     </span>
@@ -373,7 +373,7 @@
                                         border
                                         rounded-md focus:border-blue-400
                                         focus:outline-none focus:ring-1
-                                        focus:ring-blue-600" formControlName="end">
+                                        focus:ring-blue-600" formControlName="end" id="in">
                                     <span class="trigger pt-2" [owlDateTimeTrigger]="dt2">
                                         <mat-icon>calendar_today</mat-icon>
                                     </span>
@@ -409,7 +409,7 @@
                                                             vụ</mat-label>
                                                         <div class="flex
                                                                 pb-4">
-                                                            <input type="text" name="service-name" id="service-name"
+                                                            <input type="text" name="service-name" id="in"
                                                                 autocomplete="given-name" class="w-full
                                                                     px-4
                                                                     text-sm
@@ -458,7 +458,7 @@
                                                             trăm
                                                             áp dụng</mat-label>
                                                         <div class="flex">
-                                                            <input type="text" name="service-name" id="service-name"
+                                                            <input type="text" name="service-name" id="in"
                                                                 autocomplete="given-name" class="w-full
                                                                     px-4
                                                                     text-sm
@@ -589,7 +589,7 @@
     <button (click)="onSave()" class="bg-transparent hover:bg-blue-500 text-blue-700
             font-semibold hover:text-white py-2 px-4 border
             border-blue-500
-            hover:border-transparent rounded" id="saveButton" *ngIf="status == 'Đã tạo'">
+            hover:border-transparent rounded" id="saveButton" >
         Lưu
     </button>
     <button mat-button (click)="onNoClick()" class="bg-white

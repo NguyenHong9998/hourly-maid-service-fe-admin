@@ -18,7 +18,7 @@ import { DiscountServiceListDomain } from './discount-service.domain';
     styleUrls: ['./discount-service.component.scss'],
 })
 export class DiscountServiceComponent implements OnInit {
-    displayedColumns: string[] = ['select', 'name', 'start', 'end', 'status', 'num_service', 'detail'];
+    displayedColumns: string[] = ['name', 'start', 'end', 'status', 'num_service', 'detail'];
     selection = new SelectionModel<any>(true, []);
 
     @ViewChild(MatSort, { static: true }) sort!: MatSort;

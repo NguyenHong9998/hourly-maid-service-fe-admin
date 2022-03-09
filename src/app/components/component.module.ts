@@ -26,8 +26,12 @@ import { DialogListEmployeeServiceComponent } from './dialog-list-employee-servi
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
 import { SnackBarComponent } from "./snack-bar/snack-bar.component";
 import { StarRatingComponent } from './star-rating/star-rating.component';
+<<<<<<< HEAD
 import { SetExperenceComponent } from './set-experence/set-experence.component';
 import { DialogEmployeeServiceInformComponent } from './dialog-employee-service-inform/dialog-employee-service-inform.component';
+=======
+import { DialogChangeStatusServiceComponent } from './dialog-change-status-service/dialog-change-status-service.component';
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
 
 
 @NgModule({
@@ -54,8 +58,12 @@ import { DialogEmployeeServiceInformComponent } from './dialog-employee-service-
         DialogCancelTaskComponent,
         DialogDoneTaskComponent,
         StarRatingComponent,
+<<<<<<< HEAD
         SetExperenceComponent,
         DialogEmployeeServiceInformComponent,
+=======
+        DialogChangeStatusServiceComponent,
+>>>>>>> e543b3c5593f3fc720aa6717c8336262a4563fb1
     ],
     imports: [
         MatSnackBarModule,
